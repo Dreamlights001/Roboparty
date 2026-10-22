@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="RoboParty 公开主页：王宇宸的机器人学习、世界模型、仿真到真实与工业视觉项目。">
+  <title>RoboParty · Wang Yuchen</title>
+  <style>
+    :root {
+      --paper: #f5f5f2;
+      --surface: #ffffff;
+      --ink: #17252c;
+      --muted: #627078;
+      --line: #d9e0dc;
+      --blue: #155eef;
+      --blue-soft: #e9f0ff;
+      --orange: #d85a22;
+      --orange-soft: #fff0e9;
+      --green: #0d7c66;
+      --green-soft: #e5f4ef;
+      --navy: #102c3b;
+      --radius: 8px;
+      --max: 1180px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: Inter, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration: none; }
+    a:focus-visible, button:focus-visible { outline: 3px solid #9dbaff; outline-offset: 3px; }
+    button { font: inherit; }
+
+    .wrap { width: min(var(--max), calc(100% - 48px)); margin: 0 auto; }
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(245, 245, 242, .94);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(12px);
+    }
+    .header-inner { min-height: 70px; display: flex; align-items: center; gap: 24px; }
+    .brand { display: inline-flex; align-items: center; gap: 10px; font-size: 15px; font-weight: 800; letter-spacing: .06em; }
+    .mark {
+      width: 28px; height: 28px; display: inline-grid; place-items: center;
+      border: 2px solid var(--ink); color: var(--ink); font-size: 12px; font-weight: 900;
+      transform: rotate(-6deg);
+    }
+    .header-note { color: var(--muted); font-size: 12px; margin-left: auto; }
+    .nav { display: flex; align-items: center; gap: 6px; }
+    .nav a, .lang {
+      border: 0; background: transparent; color: var(--muted); cursor: pointer;
+      padding: 8px 10px; border-radius: 5px; font-size: 13px;
+    }
+    .nav a:hover, .lang:hover { color: var(--ink); background: var(--surface); }
+    .lang { border: 1px solid var(--line); margin-left: 4px; }
+
+    main { padding: 46px 0 80px; }
+    .hero {
+      display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(240px, .65fr);
+      gap: 54px; align-items: end; padding: 25px 0 50px; border-bottom: 1px solid var(--line);
+    }
+    .eyebrow { color: var(--blue); font-size: 11px; font-weight: 800; letter-spacing: .18em; text-transform: uppercase; }
+    h1 { font-size: clamp(42px, 7vw, 82px); line-height: .98; letter-spacing: -.05em; margin: 16px 0 20px; max-width: 720px; }
+    h1 span { display: block; color: var(--blue); font-size: .78em; letter-spacing: -.04em; }
+    .hero-copy { max-width: 680px; margin: 0; color: var(--muted); font-size: 17px; }
+    .hero-copy strong { color: var(--ink); font-weight: 700; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 25px; }
+    .button {
+      display: inline-flex; align-items: center; gap: 8px; border: 1px solid var(--ink); border-radius: 5px;
+      padding: 9px 14px; background: var(--ink); color: #fff; font-size: 13px; font-weight: 700;
+    }
+    .button.secondary { background: transparent; color: var(--ink); border-color: var(--line); }
+    .button:hover { background: var(--blue); border-color: var(--blue); }
+    .button.secondary:hover { color: var(--blue); background: var(--surface); border-color: var(--blue); }
+    .profile-block { display: grid; justify-items: end; gap: 18px; }
+    .avatar {
+      width: 150px; height: 150px; border: 6px solid var(--surface); outline: 1px solid var(--line);
+      object-fit: cover; background: #dfe7e7;
+    }
+    .profile-meta { text-align: right; color: var(--muted); font-size: 12px; }
+    .profile-meta strong { display: block; color: var(--ink); font-size: 16px; margin-bottom: 3px; }
+    .section { padding-top: 52px; scroll-margin-top: 88px; }
+    .section-head { display: flex; align-items: end; justify-content: space-between; gap: 18px; margin-bottom: 21px; }
+    .section-kicker { margin: 0 0 7px; color: var(--orange); font-size: 11px; letter-spacing: .15em; font-weight: 800; text-transform: uppercase; }
+    h2 { margin: 0; font-size: clamp(26px, 4vw, 38px); letter-spacing: -.035em; line-height: 1.12; }
+    .section-intro { max-width: 510px; color: var(--muted); font-size: 13px; margin: 0; }
+
+    .focus-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 9px; }
+    .focus {
+      min-height: 118px; padding: 16px; background: var(--surface); border: 1px solid var(--line); border-top: 3px solid var(--blue);
+    }
+    .focus:nth-child(2), .focus:nth-child(5) { border-top-color: var(--orange); }
+    .focus:nth-child(3) { border-top-color: var(--green); }
+    .focus-num { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; color: var(--muted); font-size: 11px; }
+    .focus h3 { margin: 13px 0 4px; font-size: 15px; line-height: 1.25; }
+    .focus p { margin: 0; color: var(--muted); font-size: 12px; line-height: 1.55; }
+
+    .skills-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .skill-group { background: var(--surface); border: 1px solid var(--line); padding: 21px; }
+    .skill-group h3 { margin: 0 0 15px; font-size: 15px; }
+    .skill-group p { color: var(--muted); font-size: 12px; margin: -7px 0 16px; }
+    .tags { display: flex; flex-wrap: wrap; gap: 7px; }
+    .tag { padding: 6px 9px; border-radius: 4px; background: var(--blue-soft); color: #174aa9; font-size: 12px; font-weight: 700; }
+    .tag:nth-child(3n) { background: var(--green-soft); color: #0a6755; }
+    .tag:nth-child(4n) { background: var(--orange-soft); color: #a33d11; }
+
+    .project-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .project {
+      display: flex; flex-direction: column; min-height: 235px; padding: 20px; background: var(--surface);
+      border: 1px solid var(--line); transition: transform .2s ease, box-shadow .2s ease;
+    }
+    .project:hover { transform: translateY(-3px); box-shadow: 0 12px 24px rgba(23, 37, 44, .08); }
+    .project-top { display: flex; justify-content: space-between; gap: 10px; align-items: start; }
+    .project-label { color: var(--blue); font: 700 11px ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .04em; }
+    .project-icon { width: 30px; height: 30px; display: grid; place-items: center; border: 1px solid var(--line); color: var(--orange); font-size: 14px; }
+    .project h3 { margin: 20px 0 7px; font-size: 18px; letter-spacing: -.02em; }
+    .project p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.62; }
+    .project-footer { margin-top: auto; padding-top: 18px; display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+    .project-tags { display: flex; flex-wrap: wrap; gap: 5px; }
+    .mini-tag { color: var(--muted); font-size: 11px; }
+    .repo-link { color: var(--blue); font-size: 12px; font-weight: 800; white-space: nowrap; }
+    .repo-link:hover { color: var(--orange); }
+
+    .contact-band { display: grid; grid-template-columns: 1.1fr .9fr; gap: 30px; align-items: center; padding: 30px; background: var(--navy); color: #fff; }
+    .contact-band .section-kicker { color: #8dd9c3; }
+    .contact-band h2 { font-size: clamp(27px, 4vw, 42px); }
+    .contact-band p { color: #b9c9cf; margin: 12px 0 0; font-size: 13px; }
+    .contact-links { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .contact-link { display: flex; align-items: center; gap: 9px; min-height: 48px; padding: 10px 12px; background: #183d4d; border: 1px solid #2c5665; color: #f2fbfc; font-size: 12px; }
+    .contact-link:hover { background: #24586b; border-color: #79c9cb; }
+    .contact-icon { color: #8dd9c3; font-weight: 900; width: 18px; }
+    footer { padding: 22px 0; border-top: 1px solid var(--line); color: var(--muted); font-size: 11px; }
+    .footer-inner { display: flex; justify-content: space-between; gap: 14px; }
+
+    @media (max-width: 900px) {
+      .header-note { display: none; }
+      .focus-grid { grid-template-columns: repeat(3, 1fr); }
+      .project-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 680px) {
+      .wrap { width: min(var(--max), calc(100% - 32px)); }
+      .header-inner { min-height: 60px; gap: 8px; }
+      .nav { margin-left: auto; gap: 0; }
+      .nav a { padding: 7px 6px; font-size: 11px; }
+      .nav a:nth-child(2) { display: none; }
+      main { padding-top: 24px; }
+      .hero { grid-template-columns: 1fr; gap: 28px; padding: 22px 0 36px; }
+      h1 { font-size: clamp(42px, 15vw, 68px); }
+      .hero-copy { font-size: 15px; }
+      .profile-block { justify-items: start; grid-template-columns: auto 1fr; display: grid; align-items: center; gap: 17px; }
+      .avatar { width: 88px; height: 88px; border-width: 4px; }
+      .profile-meta { text-align: left; }
+      .section { padding-top: 38px; }
+      .section-head { display: block; }
+      .section-intro { margin-top: 11px; }
+      .focus-grid, .skills-layout, .project-grid { grid-template-columns: 1fr; }
+      .focus { min-height: auto; }
+      .project { min-height: 0; }
+      .contact-band { grid-template-columns: 1fr; padding: 22px; gap: 22px; }
+      .contact-links { grid-template-columns: 1fr; }
+      .footer-inner { display: block; }
+      .footer-inner span { display: block; margin-top: 5px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="#top" aria-label="RoboParty home"><span class="mark">R</span>ROBOPARTY</a>
+      <span class="header-note" data-i18n="headerNote">公开主页 · Open source &amp; robotics</span>
+      <nav class="nav" aria-label="Primary navigation">
+        <a href="#focus" data-i18n="navFocus">方向</a>
+        <a href="#skills" data-i18n="navSkills">技能</a>
+        <a href="#projects" data-i18n="navProjects">开源项目</a>
+        <a href="#contact" data-i18n="navContact">联系</a>
+        <button class="lang" type="button" id="langToggle" aria-label="Switch language">EN</button>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top" class="wrap">
+    <section class="hero" aria-labelledby="heroTitle">
+      <div>
+        <div class="eyebrow" data-i18n="eyebrow">RoboParty / Public profile</div>
+        <h1 id="heroTitle">Wang Yuchen<span>机器人学习与智能系统</span></h1>
+        <p class="hero-copy" data-i18n="heroCopy"><strong>浙江大学机械工程学院研一硕士在读。</strong> 关注世界模型、具身智能、自动驾驶与多机器人协作，持续把可复现的研究想法整理成公开代码、工具与评测资源。</p>
+        <div class="hero-actions">
+          <a class="button" href="#projects" data-i18n="viewProjects">查看开源项目 <span aria-hidden="true">↗</span></a>
+          <a class="button secondary" href="mailto:16627863893@163.com" data-i18n="emailMe">发送邮件 <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+      <div class="profile-block">
+        <img class="avatar" src="https://avatars.githubusercontent.com/u/127041941?v=4" alt="Wang Yuchen" loading="eager">
+        <div class="profile-meta"><strong>Wang Yuchen · 王宇宸</strong><span data-i18n="profileMeta">Mechanical engineering · Robotics · AI</span></div>
+      </div>
+    </section>
+
+    <section id="focus" class="section" aria-labelledby="focusTitle">
+      <div class="section-head"><div><p class="section-kicker" data-i18n="focusKicker">Research map</p><h2 id="focusTitle" data-i18n="focusTitle">公开研究方向</h2></div><p class="section-intro" data-i18n="focusIntro">从表征、生成到真实执行，关注让机器人系统更可学习、更可验证。</p></div>
+      <div class="focus-grid">
+        <article class="focus"><span class="focus-num">01</span><h3 data-i18n="focus1Title">世界模型 / JEPA</h3><p data-i18n="focus1Text">空间智能、预测表征与环境建模。</p></article>
+        <article class="focus"><span class="focus-num">02</span><h3 data-i18n="focus2Title">具身智能</h3><p data-i18n="focus2Text">视觉语言动作模型与闭环机器人学习。</p></article>
+        <article class="focus"><span class="focus-num">03</span><h3 data-i18n="focus3Title">仿真到真实</h3><p data-i18n="focus3Text">机器人操作、数据生成与可复现实验。</p></article>
+        <article class="focus"><span class="focus-num">04</span><h3 data-i18n="focus4Title">多机器人协作</h3><p data-i18n="focus4Text">协作任务、规划与评测基准。</p></article>
+        <article class="focus"><span class="focus-num">05</span><h3 data-i18n="focus5Title">自动驾驶</h3><p data-i18n="focus5Text">感知、决策与智能系统方法。</p></article>
+      </div>
+    </section>
+
+    <section id="skills" class="section" aria-labelledby="skillsTitle">
+      <div class="section-head"><div><p class="section-kicker" data-i18n="skillsKicker">Toolkit</p><h2 id="skillsTitle" data-i18n="skillsTitle">技能栈</h2></div><p class="section-intro" data-i18n="skillsIntro">覆盖模型、机器人软件和机械工程工具，偏好可复现、可部署的工作流。</p></div>
+      <div class="skills-layout">
+        <article class="skill-group"><h3 data-i18n="skillAiTitle">AI / Machine Learning</h3><p data-i18n="skillAiIntro">从视觉表征到策略学习</p><div class="tags"><span class="tag">Python</span><span class="tag">C/C++</span><span class="tag">PyTorch</span><span class="tag">TensorFlow</span><span class="tag">Transformer</span><span class="tag">CLIP</span><span class="tag">SAM</span><span class="tag">VLM / VLA</span><span class="tag">JEPA</span><span class="tag">Agentic AI</span></div></article>
+        <article class="skill-group"><h3 data-i18n="skillRobotTitle">Robotics / Engineering</h3><p data-i18n="skillRobotIntro">把算法落到仿真、控制与工程现场</p><div class="tags"><span class="tag">ROS 2</span><span class="tag">MuJoCo</span><span class="tag">Isaac Sim</span><span class="tag">RoboTwin</span><span class="tag">LeRobot</span><span class="tag">Git</span><span class="tag">Docker</span><span class="tag">SolidWorks</span><span class="tag">CATIA</span><span class="tag">MATLAB</span><span class="tag">PLC</span><span class="tag">Simulink</span></div></article>
+      </div>
+    </section>
+
+    <section id="projects" class="section" aria-labelledby="projectsTitle">
+      <div class="section-head"><div><p class="section-kicker" data-i18n="projectsKicker">Selected repositories</p><h2 id="projectsTitle" data-i18n="projectsTitle">已开源项目</h2></div><p class="section-intro" data-i18n="projectsIntro">只展示个人 GitHub 上可公开访问的仓库与工具。</p></div>
+      <div class="project-grid">
+        <article class="project"><div class="project-top"><span class="project-label">BENCHMARK / SURVEY</span><span class="project-icon" aria-hidden="true">↗</span></div><h3>Embodied_arm</h3><p data-i18n="project1Text">机器人操作任务、Benchmark、数据集与挑战赛的公开调研看板，并整理智能制造相关性与仿真平台信息。</p><div class="project-footer"><div class="project-tags"><span class="mini-tag">HTML</span><span class="mini-tag">Research</span></div><a class="repo-link" href="https://github.com/Dreamlights001/Embodied_arm" target="_blank" rel="noopener">GitHub ↗</a></div></article>
+        <article class="project"><div class="project-top"><span class="project-label">ROBOT LEARNING</span><span class="project-icon" aria-hidden="true">↗</span></div><h3>pistar</h3><p data-i18n="project2Text">公开的机器人学习项目仓库，聚焦策略学习、示范数据与真实机器人实验的可复现工作流。</p><div class="project-footer"><div class="project-tags"><span class="mini-tag">Python</span><span class="mini-tag">Robot learning</span></div><a class="repo-link" href="https://github.com/Dreamlights001/pistar" target="_blank" rel="noopener">GitHub ↗</a></div></article>
+        <article class="project"><div class="project-top"><span class="project-label">OPEN SOURCE / CAD</span><span class="project-icon" aria-hidden="true">↗</span></div><h3>T2CAD</h3><p data-i18n="project3Text">公开的 CAD 相关代码仓库，项目说明与使用方式以 GitHub 页面为准。</p><div class="project-footer"><div class="project-tags"><span class="mini-tag">GitHub</span><span class="mini-tag">CAD</span></div><a class="repo-link" href="https://github.com/Dreamlights001/T2CAD" target="_blank" rel="noopener">GitHub ↗</a></div></article>
+      </div>
+    </section>
+
+    <section id="contact" class="section" aria-labelledby="contactTitle">
+      <div class="contact-band">
+        <div><p class="section-kicker" data-i18n="contactKicker">Open to connect</p><h2 id="contactTitle" data-i18n="contactTitle">一起讨论机器人与智能系统</h2><p data-i18n="contactText">公开合作、学术交流或项目反馈，欢迎通过以下方式联系。</p></div>
+        <div class="contact-links">
+          <a class="contact-link" href="mailto:16627863893@163.com"><span class="contact-icon">@</span><span>16627863893@163.com</span></a>
+          <a class="contact-link" href="https://github.com/Dreamlights001" target="_blank" rel="noopener"><span class="contact-icon">GH</span><span>github.com/Dreamlights001</span></a>
+          <a class="contact-link" href="https://orcid.org/0009-0001-4442-6068" target="_blank" rel="noopener"><span class="contact-icon">ID</span><span>ORCID 0009-0001-4442-6068</span></a>
+          <a class="contact-link" href="https://www.linkedin.com/in/%E5%AE%87%E7%90%9B-%E7%8E%8B-0a6aa6391/" target="_blank" rel="noopener"><span class="contact-icon">in</span><span>LinkedIn</span></a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer><div class="wrap footer-inner"><span>© 2026 RoboParty · Wang Yuchen</span><span data-i18n="footerText">仅包含公开个人信息与公开仓库链接</span></div></footer>
+
+  <script>
+    const copy = {
+      zh: {
+        headerNote: "公开主页 · Open source & robotics", navFocus: "方向", navSkills: "技能", navProjects: "开源项目", navContact: "联系", eyebrow: "RoboParty / Public profile",
+        heroCopy: "<strong>浙江大学机械工程学院研一硕士在读。</strong> 关注世界模型、具身智能、自动驾驶与多机器人协作，持续把可复现的研究想法整理成公开代码、工具与评测资源。", viewProjects: "查看开源项目 <span aria-hidden=\"true\">↗</span>", emailMe: "发送邮件 <span aria-hidden=\"true\">→</span>", profileMeta: "Mechanical engineering · Robotics · AI",
+        focusKicker: "Research map", focusTitle: "公开研究方向", focusIntro: "从表征、生成到真实执行，关注让机器人系统更可学习、更可验证。", focus1Title: "世界模型 / JEPA", focus1Text: "空间智能、预测表征与环境建模。", focus2Title: "具身智能", focus2Text: "视觉语言动作模型与闭环机器人学习。", focus3Title: "仿真到真实", focus3Text: "机器人操作、数据生成与可复现实验。", focus4Title: "多机器人协作", focus4Text: "协作任务、规划与评测基准。", focus5Title: "自动驾驶", focus5Text: "感知、决策与智能系统方法。",
+        skillsKicker: "Toolkit", skillsTitle: "技能栈", skillsIntro: "覆盖模型、机器人软件和机械工程工具，偏好可复现、可部署的工作流。", skillAiTitle: "AI / Machine Learning", skillAiIntro: "从视觉表征到策略学习", skillRobotTitle: "Robotics / Engineering", skillRobotIntro: "把算法落到仿真、控制与工程现场",
+        projectsKicker: "Selected repositories", projectsTitle: "已开源项目", projectsIntro: "只展示个人 GitHub 上可公开访问的仓库与工具。", project1Text: "机器人操作任务、Benchmark、数据集与挑战赛的公开调研看板，并整理智能制造相关性与仿真平台信息。", project2Text: "公开的机器人学习项目仓库，聚焦策略学习、示范数据与真实机器人实验的可复现工作流。", project3Text: "公开的 CAD 相关代码仓库，项目说明与使用方式以 GitHub 页面为准。",
+        contactKicker: "Open to connect", contactTitle: "一起讨论机器人与智能系统", contactText: "公开合作、学术交流或项目反馈，欢迎通过以下方式联系。", footerText: "仅包含公开个人信息与公开仓库链接"
+      },
+      en: {
+        headerNote: "Public profile · Open source & robotics", navFocus: "Focus", navSkills: "Skills", navProjects: "Projects", navContact: "Contact", eyebrow: "RoboParty / Public profile",
+        heroCopy: "<strong>First-year M.Eng. student in Mechanical Engineering at Zhejiang University.</strong> I work across world models, embodied intelligence, autonomous driving, and multi-robot collaboration, turning reproducible ideas into public code, tools, and evaluation resources.", viewProjects: "View projects <span aria-hidden=\"true\">↗</span>", emailMe: "Email me <span aria-hidden=\"true\">→</span>", profileMeta: "Mechanical engineering · Robotics · AI",
+        focusKicker: "Research map", focusTitle: "Public research focus", focusIntro: "From representation and generation to real execution, I build robot systems that are easier to learn and verify.", focus1Title: "World models / JEPA", focus1Text: "Spatial intelligence, predictive representation, and environment modeling.", focus2Title: "Embodied intelligence", focus2Text: "Vision-language-action models and closed-loop robot learning.", focus3Title: "Sim-to-real", focus3Text: "Robot manipulation, data generation, and reproducible experiments.", focus4Title: "Multi-robot collaboration", focus4Text: "Collaborative tasks, planning, and evaluation benchmarks.", focus5Title: "Autonomous driving", focus5Text: "Perception, decision-making, and intelligent systems.",
+        skillsKicker: "Toolkit", skillsTitle: "Technical stack", skillsIntro: "Models, robot software, and mechanical engineering tools for reproducible and deployable workflows.", skillAiTitle: "AI / Machine Learning", skillAiIntro: "From visual representation to policy learning", skillRobotTitle: "Robotics / Engineering", skillRobotIntro: "Putting algorithms into simulation, control, and engineering workflows",
+        projectsKicker: "Selected repositories", projectsTitle: "Open-source projects", projectsIntro: "A selection of public repositories and tools from my GitHub profile.", project1Text: "A public survey board for robot manipulation tasks, benchmarks, datasets, and challenges, with simulator and manufacturing relevance notes.", project2Text: "A public robot-learning repository focused on reproducible workflows for policy learning, demonstrations, and real-robot experiments.", project3Text: "A public CAD-related code repository; see GitHub for the project description and usage details.",
+        contactKicker: "Open to connect", contactTitle: "Let’s discuss robots and intelligent systems", contactText: "For public collaboration, academic exchange, or project feedback, reach out through the links below.", footerText: "Public personal information and public repository links only"
+      }
+    };
+    let lang = "zh";
+    const toggle = document.getElementById("langToggle");
+    function renderLanguage() {
+      document.documentElement.lang = lang === "zh" ? "zh-CN" : "en";
+      document.querySelectorAll("[data-i18n]").forEach((node) => {
+        const key = node.dataset.i18n;
+        if (copy[lang][key] !== undefined) node.innerHTML = copy[lang][key];
+      });
+      toggle.textContent = lang === "zh" ? "EN" : "中文";
+      toggle.setAttribute("aria-label", lang === "zh" ? "Switch to English" : "切换为中文");
+    }
+    toggle.addEventListener("click", () => { lang = lang === "zh" ? "en" : "zh"; renderLanguage(); });
+    renderLanguage();
+  </script>
+</body>
+</html>
